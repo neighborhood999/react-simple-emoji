@@ -28,13 +28,22 @@ export default class EmojiPicker extends Component {
   constructor() {
     super();
     this.state = { text: '', filterEmoji: false, filterEmojiResult: '' };
-    this.displayCategoryOfEmoji = this.displayCategoryOfEmoji.bind(this);
+    this.renderEmojiCategory = this.renderEmojiCategory.bind(this);
     this.renderAllEmoji = this.renderAllEmoji.bind(this);
     this.renderFilterEmoji = this.renderFilterEmoji.bind(this);
     this.filterEmoji = this.filterEmoji.bind(this);
   }
 
-  displayCategoryOfEmoji(category, handleEmoji) {
+  filterEmoji(e) {
+    const emojiName = e.target.value;
+    const filterEmojiResult = emojis.filter(name => name.indexOf(emojiName) !== -1);
+
+    return emojiName.length === 0 ?
+      this.setState({ filterEmoji: false }) :
+      this.setState({ filterEmoji: true, filterEmojiResult });
+  }
+
+  renderEmojiCategory(category, handleEmoji) {
     return category.map((emoji) => {
       return (
         <span key={emoji}>
@@ -50,7 +59,7 @@ export default class EmojiPicker extends Component {
         return (
           <div key={category}>
             <p>{category}</p>
-            {this.displayCategoryOfEmoji(
+            {this.renderEmojiCategory(
               categoryEmojis[Object.keys(categoryEmojis)[i]],
               handleEmoji
             )}
@@ -76,15 +85,6 @@ export default class EmojiPicker extends Component {
         </span>
       );
     });
-  }
-
-  filterEmoji(e) {
-    const emojiName = e.target.value;
-    const filterEmojiResult = emojis.filter(name => name.indexOf(emojiName) !== -1);
-
-    return emojiName.length === 0 ?
-      this.setState({ filterEmoji: false }) :
-      this.setState({ filterEmoji: true, filterEmojiResult });
   }
 
   render() {
