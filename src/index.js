@@ -2,6 +2,7 @@
 import React, { Component, PropTypes } from 'react';
 import getEmoji from 'get-emoji';
 import { emojis, categoryOfEmoji } from './emoji';
+import emojiButtonImage from './emojiButtonImage';
 
 const selectorStyle = {
   boxShadow: '0 10px 10px 0 rgba(0, 0, 0, 0.20)',
@@ -93,8 +94,8 @@ export default class EmojiPicker extends Component {
     const filterEmojiResult = this.state.filterEmojiResult;
 
     return (
-      <div>
-        <button type="button" onClick={() => selector()}>Emoji</button>
+      <span>
+        <img role="presentation" src={emojiButtonImage} onClick={() => selector()} />
         <div style={show ? selectorStyle : { display: 'none' }}>
           <input
             ref={(ref) => this.myTextInput = ref}
@@ -113,7 +114,7 @@ export default class EmojiPicker extends Component {
             this.renderAllEmoji(categoryOfEmoji, handleEmoji)
           }
         </div>
-      </div>
+      </span>
     );
   }
 }
