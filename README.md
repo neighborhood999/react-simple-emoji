@@ -67,19 +67,19 @@ export default class App extends Component {
 
 ##### show
 
-_Required Type:_ boolean  
+_Required Type:_ `boolean`  
 
 Showing emoji picker state.
 
 ##### selector
 
-_Required Type:_ function  
+_Required Type:_ `function`  
 
 Change emoji picker showing state.
 
 ##### handleEmoji
 
-_Required Type:_ function  
+_Required Type:_ `function`  
 
 Handle input text and emoji.
 

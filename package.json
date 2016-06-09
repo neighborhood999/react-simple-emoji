@@ -1,6 +1,6 @@
 {
   "name": "react-simple-emoji",
-  "version": "0.0.5",
+  "version": "0.1.0",
   "description": "Simple emoji picker.",
   "main": "dist/react-emoji-picker.js",
   "scripts": {
@@ -20,7 +20,7 @@
     "babel": "inherit"
   },
   "author": "Peng Jie <dean.leehom@gmail.com> (https://github.com/neighborhood999)",
-	"repository": {
+  "repository": {
     "type": "git",
     "url": "https://github.com/neighborhood999/react-simple-emoji.git"
   },
