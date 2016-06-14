@@ -65,7 +65,7 @@ test('EmojiPicker should render all emoji', t => {
 });
 
 
-test('EmojiPicker should render filter emoji', t => {
+test('EmojiPicker should render filter emoji and click emoji should change state', t => {
   const props = {
     show: false,
     selector: spy(),
@@ -79,6 +79,7 @@ test('EmojiPicker should render filter emoji', t => {
 
   const smileEmoji = emojiPicker.find('#smile');
   smileEmoji.simulate('click');
+
   t.is(props.handleEmoji.calledOnce, true);
   t.is(emojiPicker.state('filterEmoji'), false);
 });

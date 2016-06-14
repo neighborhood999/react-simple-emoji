@@ -1,12 +1,18 @@
 # react-simple-emoji
 
+[![Build Status](https://travis-ci.org/neighborhood999/react-simple-emoji.svg?branch=test)](https://travis-ci.org/neighborhood999/react-simple-emoji)
+[![Coverage Status](https://coveralls.io/repos/github/neighborhood999/react-simple-emoji/badge.svg?branch=master)](https://coveralls.io/github/neighborhood999/react-simple-emoji?branch=master)
+[![Dependency Status](https://david-dm.org/neighborhood999/react-simple-emoji.svg)](https://david-dm.org/neighborhood999/react-simple-emoji)
+
 A simple emoji picker component. :wink:
 
-## How To Use
+## Install
 
 ```sh
 $ npm install react-simple-emoji
 ```
+
+## How to Use
 
 If you have main component, and you want to add emoji picker:
 
@@ -85,7 +91,9 @@ Handle input text and emoji.
 
 ## Test
 
-_TODO_
+```sh
+$ npm test
+```
 
 ## Lint
 
@@ -95,4 +103,4 @@ $ npm run lint
 
 ## LICENSE
 
-MIT © [Peng Jie](https://github.com/neighborhood999)
+![MIT](https://camo2.githubusercontent.com/890acbdcb87868b382af9a4b1fac507b9659d9bf/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f6c6963656e73652d4d49542d626c75652e737667) © [Peng Jie](https://github.com/neighborhood999)
