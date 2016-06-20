@@ -5,17 +5,7 @@ import { emojis, categoryOfEmoji } from './emoji';
 import emojiButtonImage from './emojiButtonImage';
 import EmojiButton from './emojiButton';
 import EmojiImage from './emojiImage';
-
-const selectorStyle = {
-  boxShadow: '0 10px 10px 0 rgba(0, 0, 0, 0.20)',
-  backgroundColor: '#fff',
-  width: '250px',
-  height: '220px',
-  position: 'relative',
-  left: '10px',
-  top: '0px',
-  overflow: 'scroll',
-};
+import { defaultSelectorStyle, defaultEmojiInputSearchStyle } from './emojiStyle';
 
 export default class EmojiPicker extends Component {
   static propTypes = {
@@ -95,14 +85,16 @@ export default class EmojiPicker extends Component {
 
   render() {
     const { show, selector, handleEmoji } = this.props;
+    let { emojiInputSearchStyle, selectorStyle } = this.props;
     const filterEmoji = this.state.filterEmoji;
     const filterEmojiResult = this.state.filterEmojiResult;
-    const emojiInputSearchStyle = {
-      margin: '5px',
-      width: '90%',
-      borderRadius: '5px',
-      border: '1px solid #E8E8E8',
-    };
+
+    if (emojiInputSearchStyle === undefined) {
+      emojiInputSearchStyle = defaultEmojiInputSearchStyle;
+    }
+    if (selectorStyle === undefined) {
+      selectorStyle = defaultSelectorStyle;
+    }
 
     return (
       <span>
