@@ -3,6 +3,7 @@ import React from 'react';
 import { shallow, mount } from 'enzyme';
 import { spy } from 'sinon';
 import EmojiPicker from '../src/index';
+import { defaultSelectorStyle, defaultEmojiSearchInputStyle } from '../src/emojiStyle';
 
 test('EmojiPicker should be render', t => {
   const props = {
@@ -82,4 +83,40 @@ test('EmojiPicker should render filter emoji and click emoji should change state
 
   t.is(props.handleEmoji.calledOnce, true);
   t.is(emojiPicker.state('filterEmoji'), false);
+});
+
+test('EmojiPicker custom input search and emoji selector style should be render', t => {
+  const props = {
+    show: false,
+    selector: spy(),
+    handleEmoji: spy(),
+    emojiSearchInputStyle: { height: '20px' },
+    selectorStyle: { width: '250px', height: '220px' },
+  };
+  const emojiPicker = mount(<EmojiPicker {...props} />);
+  const searchInputStyle = emojiPicker.find('input').at(0).prop('style');
+
+  t.is(searchInputStyle, props.emojiSearchInputStyle);
+
+  emojiPicker.setProps({ show: true });
+  const selectorStyle = emojiPicker.find('#showing').at(0).prop('style');
+
+  t.is(selectorStyle, props.selectorStyle);
+});
+
+test('EmojiPicker input search and emoji selector use default style should be render', t => {
+  const props = {
+    show: false,
+    selector: spy(),
+    handleEmoji: spy(),
+  };
+  const emojiPicker = mount(<EmojiPicker {...props} />);
+  const searchInputStyle = emojiPicker.find('input').at(0).prop('style');
+
+  t.is(searchInputStyle, defaultEmojiSearchInputStyle);
+
+  emojiPicker.setProps({ show: true });
+  const selectorStyle = emojiPicker.find('#showing').at(0).prop('style');
+
+  t.is(selectorStyle, defaultSelectorStyle);
 });

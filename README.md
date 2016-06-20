@@ -27,6 +27,7 @@ export default class App extends Component {
     this.handleEmoji = this.handleEmoji.bind(this);
     this.selectEmoji = this.selectEmoji.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
+		this.handleKeyDown = this.handleKeyDown.bind(this);
   }
 
   selectEmoji() {
@@ -50,17 +51,17 @@ export default class App extends Component {
   render() {
     return (
       <div>
-        <input
-          value={this.state.text}
-          type="text"
-          onChange={(e) => this.handleInputChange(e)}
-          onKeyDown={(e) => this.handleKeyDown(e)}
-        />
-        <EmojiPicker
-          show={this.state.showSelector}
-          selector={() => this.selectEmoji()}
-          handleEmoji={(e) => this.handleEmoji(e)}
-        />
+				<input
+					value={this.state.text}
+					type="text"
+					onChange={this.handleInputChange}
+					onKeyDown={this.handleKeyDown}
+				/>
+				<EmojiPicker
+					show={this.state.showSelector}
+					selector={this.selectEmoji}
+					handleEmoji={this.handleEmoji}
+				/>
       </div>
     );
   }
@@ -88,6 +89,18 @@ Change emoji picker showing state.
 _Required Type:_ `function`  
 
 Handle input text and emoji.
+
+##### emojiSearchInputStyle
+
+_Type:_ `object`
+
+Custom your emoji search input style.
+
+##### selectorStyle
+
+_Type:_ `object`
+
+Custom your selector box style.
 
 ## Test
 

@@ -5,13 +5,15 @@ import { emojis, categoryOfEmoji } from './emoji';
 import emojiButtonImage from './emojiButtonImage';
 import EmojiButton from './emojiButton';
 import EmojiImage from './emojiImage';
-import { defaultSelectorStyle, defaultEmojiInputSearchStyle } from './emojiStyle';
+import { defaultSelectorStyle, defaultEmojiSearchInputStyle } from './emojiStyle';
 
 export default class EmojiPicker extends Component {
   static propTypes = {
     show: PropTypes.bool.isRequired,
     selector: PropTypes.func.isRequired,
     handleEmoji: PropTypes.func.isRequired,
+    selectorStyle: PropTypes.object,
+    emojiSearchInputStyle: PropTypes.object,
   }
 
   constructor(props) {
@@ -85,12 +87,12 @@ export default class EmojiPicker extends Component {
 
   render() {
     const { show, selector, handleEmoji } = this.props;
-    let { emojiInputSearchStyle, selectorStyle } = this.props;
+    let { emojiSearchInputStyle, selectorStyle } = this.props;
     const filterEmoji = this.state.filterEmoji;
     const filterEmojiResult = this.state.filterEmojiResult;
 
-    if (emojiInputSearchStyle === undefined) {
-      emojiInputSearchStyle = defaultEmojiInputSearchStyle;
+    if (emojiSearchInputStyle === undefined) {
+      emojiSearchInputStyle = defaultEmojiSearchInputStyle;
     }
     if (selectorStyle === undefined) {
       selectorStyle = defaultSelectorStyle;
@@ -102,10 +104,10 @@ export default class EmojiPicker extends Component {
         <div id="showing" style={show ? selectorStyle : { display: 'none' }}>
           <input
             ref={(ref) => this.myTextInput = ref}
-            style={emojiInputSearchStyle}
+            style={emojiSearchInputStyle}
             type="text"
             placeholder="Search"
-            onChange={(e) => this.filterEmoji(e)}
+            onChange={this.filterEmoji}
           />
           {filterEmoji ?
             this.renderFilterEmoji(filterEmojiResult, handleEmoji) :

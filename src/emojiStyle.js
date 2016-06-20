@@ -9,7 +9,7 @@ export const defaultSelectorStyle = {
   overflow: 'scroll',
 };
 
-export const defaultEmojiInputSearchStyle = {
+export const defaultEmojiSearchInputStyle = {
   margin: '5px',
   width: '90%',
   borderRadius: '5px',
