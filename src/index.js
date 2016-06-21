@@ -2,9 +2,10 @@
 import React, { Component, PropTypes } from 'react';
 import getEmoji from 'get-emoji';
 import { emojis, categoryOfEmoji } from './emoji';
-import emojiButtonImage from './emojiButtonImage';
+import SelectorBox from './selectorBox';
 import EmojiButton from './emojiButton';
 import EmojiImage from './emojiImage';
+import EmojiButtonImage from './emojiButtonImage';
 import { defaultSelectorStyle, defaultEmojiSearchInputStyle } from './emojiStyle';
 
 export default class EmojiPicker extends Component {
@@ -23,6 +24,11 @@ export default class EmojiPicker extends Component {
     this.renderAllEmoji = this.renderAllEmoji.bind(this);
     this.renderFilterEmoji = this.renderFilterEmoji.bind(this);
     this.filterEmoji = this.filterEmoji.bind(this);
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    return nextProps.show !== this.props.show ||
+      nextState.filterEmojiResult !== this.state.filterEmojiResult;
   }
 
   filterEmoji(e) {
@@ -70,7 +76,7 @@ export default class EmojiPicker extends Component {
             <span key={e}>
               <img
                 id={e}
-                alt={emoji}
+                role="presentation"
                 src={getEmoji(e)}
                 onClick={() => {
                   handleEmoji(e);
@@ -100,8 +106,8 @@ export default class EmojiPicker extends Component {
 
     return (
       <span>
-        <EmojiButton src={emojiButtonImage} selector={selector} />
-        <div id="showing" style={show ? selectorStyle : { display: 'none' }}>
+        <EmojiButton src={EmojiButtonImage} selector={selector} />
+        <SelectorBox show={show} style={selectorStyle}>
           <input
             ref={(ref) => this.myTextInput = ref}
             style={emojiSearchInputStyle}
@@ -113,7 +119,7 @@ export default class EmojiPicker extends Component {
             this.renderFilterEmoji(filterEmojiResult, handleEmoji) :
             this.renderAllEmoji(categoryOfEmoji, handleEmoji)
           }
-        </div>
+        </SelectorBox>
       </span>
     );
   }

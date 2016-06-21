@@ -3,6 +3,7 @@ import React from 'react';
 import { shallow, mount } from 'enzyme';
 import { spy } from 'sinon';
 import EmojiPicker from '../src/index';
+import SelectorBox from '../src/selectorBox';
 import { defaultSelectorStyle, defaultEmojiSearchInputStyle } from '../src/emojiStyle';
 
 test('EmojiPicker should be render', t => {
@@ -12,11 +13,19 @@ test('EmojiPicker should be render', t => {
     handleEmoji: spy(),
   };
   const emojiPicker = shallow(<EmojiPicker {...props} />);
+  const selectorBox = shallow(
+    <SelectorBox show={props.show} style={defaultSelectorStyle}>
+      <p>test</p>
+      <p>emoji image</p>
+    </SelectorBox>
+  );
 
   t.is(emojiPicker.find('EmojiButton').length, 1);
-  t.is(emojiPicker.find('#showing').length, 1);
   t.is(emojiPicker.find('input').length, 1);
   t.is(emojiPicker.find('#allEmoji').length, 1);
+
+  emojiPicker.setProps({ show: true });
+  t.is(selectorBox.find('#showing').length, 1);
 });
 
 test('EmojiPicker initial state', t => {

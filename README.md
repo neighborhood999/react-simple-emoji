@@ -27,7 +27,7 @@ export default class App extends Component {
     this.handleEmoji = this.handleEmoji.bind(this);
     this.selectEmoji = this.selectEmoji.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
-		this.handleKeyDown = this.handleKeyDown.bind(this);
+    this.handleKeyDown = this.handleKeyDown.bind(this);
   }
 
   selectEmoji() {
@@ -51,17 +51,17 @@ export default class App extends Component {
   render() {
     return (
       <div>
-				<input
-					value={this.state.text}
-					type="text"
-					onChange={this.handleInputChange}
-					onKeyDown={this.handleKeyDown}
-				/>
-				<EmojiPicker
-					show={this.state.showSelector}
-					selector={this.selectEmoji}
-					handleEmoji={this.handleEmoji}
-				/>
+		<input
+		  value={this.state.text}
+		  type="text"
+		  onChange={this.handleInputChange}
+		  onKeyDown={this.handleKeyDown}
+		/>
+		<EmojiPicker
+		  show={this.state.showSelector}
+		  selector={this.selectEmoji}
+		  handleEmoji={this.handleEmoji}
+		/>
       </div>
     );
   }
@@ -76,31 +76,31 @@ export default class App extends Component {
 
 _Required Type:_ `boolean`  
 
-Showing emoji picker state.
+> Showing emoji picker state.
 
 ##### selector
 
 _Required Type:_ `function`  
 
-Change emoji picker showing state.
+> Change emoji picker showing state.
 
 ##### handleEmoji
 
 _Required Type:_ `function`  
 
-Handle input text and emoji.
+> Handle input text and emoji.
 
 ##### emojiSearchInputStyle
 
 _Type:_ `object`
 
-Custom your emoji search input style.
+> Custom your emoji search input style.
 
 ##### selectorStyle
 
 _Type:_ `object`
 
-Custom your selector box style.
+> Custom your selector box style.
 
 ## Test
 
@@ -116,4 +116,4 @@ $ npm run lint
 
 ## LICENSE
 
-![MIT](https://camo2.githubusercontent.com/890acbdcb87868b382af9a4b1fac507b9659d9bf/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f6c6963656e73652d4d49542d626c75652e737667) © [Peng Jie](https://github.com/neighborhood999)
+MIT © [Peng Jie](https://github.com/neighborhood999)
