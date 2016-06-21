@@ -19,7 +19,7 @@ export default class EmojiPicker extends Component {
 
   constructor(props) {
     super(props);
-    this.state = { text: '', filterEmoji: false, filterEmojiResult: '' };
+    this.state = { text: '', filterEmoji: false, filterEmojiResult: [] };
     this.renderEmojiCategory = this.renderEmojiCategory.bind(this);
     this.renderAllEmoji = this.renderAllEmoji.bind(this);
     this.renderFilterEmoji = this.renderFilterEmoji.bind(this);
@@ -36,7 +36,7 @@ export default class EmojiPicker extends Component {
     const filterEmojiResult = emojis.filter(name => name.indexOf(emojiName) !== -1);
 
     return emojiName.length === 0 ?
-      this.setState({ filterEmoji: false }) :
+      this.setState({ filterEmoji: false, filterEmojiResult: [] }) :
       this.setState({ filterEmoji: true, filterEmojiResult });
   }
 

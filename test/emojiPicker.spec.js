@@ -3,7 +3,6 @@ import React from 'react';
 import { shallow, mount } from 'enzyme';
 import { spy } from 'sinon';
 import EmojiPicker from '../src/index';
-import SelectorBox from '../src/selectorBox';
 import { defaultSelectorStyle, defaultEmojiSearchInputStyle } from '../src/emojiStyle';
 
 test('EmojiPicker should be render', t => {
@@ -13,19 +12,13 @@ test('EmojiPicker should be render', t => {
     handleEmoji: spy(),
   };
   const emojiPicker = shallow(<EmojiPicker {...props} />);
-  const selectorBox = shallow(
-    <SelectorBox show={props.show} style={defaultSelectorStyle}>
-      <p>test</p>
-      <p>emoji image</p>
-    </SelectorBox>
-  );
 
   t.is(emojiPicker.find('EmojiButton').length, 1);
   t.is(emojiPicker.find('input').length, 1);
   t.is(emojiPicker.find('#allEmoji').length, 1);
 
   emojiPicker.setProps({ show: true });
-  t.is(selectorBox.find('#showing').length, 1);
+  t.is(emojiPicker.find('SelectorBox').length, 1);
 });
 
 test('EmojiPicker initial state', t => {
@@ -35,11 +28,11 @@ test('EmojiPicker initial state', t => {
     handleEmoji: spy(),
   };
   const emojiPicker = shallow(<EmojiPicker {...props} />);
-  const expectedState = { text: '', filterEmoji: false, filterEmojiResult: '' };
+  const expectedState = { text: '', filterEmoji: false, filterEmojiResult: [] };
 
   t.is(emojiPicker.state('text'), expectedState.text);
   t.is(emojiPicker.state('filterEmoji'), expectedState.filterEmoji);
-  t.is(emojiPicker.state('filterEmojiResult'), expectedState.filterEmojiResult);
+  t.is(emojiPicker.state('filterEmojiResult').length, expectedState.filterEmojiResult.length);
 });
 
 test('EmojiPicker search input should be change', t => {
@@ -53,7 +46,7 @@ test('EmojiPicker search input should be change', t => {
   const emojiPicker = shallow(<EmojiPicker {...props} />);
   const emojiInputSearch = emojiPicker.find('input');
 
-  t.is(emojiInputSearch.at(0).nodes[0].ref('smile'), 'smile'); // test input ref
+  t.is(emojiInputSearch.at(0).nodes[0].ref('smile'), 'smile');
 
   emojiInputSearch.prop('onChange')(mockInput);
   t.is(emojiPicker.state('filterEmoji'), true);

@@ -1,13 +1,13 @@
 {
   "name": "react-simple-emoji",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Simple emoji picker.",
   "main": "dist/react-emoji-picker.js",
   "scripts": {
     "clean": "rimraf lib dist .nyc_output || rm -rf lib dist .nyc_output",
     "lint": "eslint src",
     "test": "ava -v",
-    "test:watch": "ava -v -- --watch",
+    "test:watch": "npm test -- --watch",
     "test:cov": "nyc npm test",
     "build:lib": "babel src --out-dir lib",
     "build:umd:min": "webpack src/index.js dist/react-emoji-picker.js --config webpack.production.js",
