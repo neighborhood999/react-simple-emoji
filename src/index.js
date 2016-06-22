@@ -2,35 +2,33 @@
 import React, { Component, PropTypes } from 'react';
 import getEmoji from 'get-emoji';
 import { emojis, categoryOfEmoji } from './emoji';
-import emojiButtonImage from './emojiButtonImage';
+import SelectorBox from './selectorBox';
 import EmojiButton from './emojiButton';
 import EmojiImage from './emojiImage';
-
-const selectorStyle = {
-  boxShadow: '0 10px 10px 0 rgba(0, 0, 0, 0.20)',
-  backgroundColor: '#fff',
-  width: '250px',
-  height: '220px',
-  position: 'relative',
-  left: '10px',
-  top: '0px',
-  overflow: 'scroll',
-};
+import EmojiButtonImage from './emojiButtonImage';
+import { defaultSelectorStyle, defaultEmojiSearchInputStyle } from './emojiStyle';
 
 export default class EmojiPicker extends Component {
   static propTypes = {
     show: PropTypes.bool.isRequired,
     selector: PropTypes.func.isRequired,
     handleEmoji: PropTypes.func.isRequired,
+    selectorStyle: PropTypes.object,
+    emojiSearchInputStyle: PropTypes.object,
   }
 
   constructor(props) {
     super(props);
-    this.state = { text: '', filterEmoji: false, filterEmojiResult: '' };
+    this.state = { text: '', filterEmoji: false, filterEmojiResult: [] };
     this.renderEmojiCategory = this.renderEmojiCategory.bind(this);
     this.renderAllEmoji = this.renderAllEmoji.bind(this);
     this.renderFilterEmoji = this.renderFilterEmoji.bind(this);
     this.filterEmoji = this.filterEmoji.bind(this);
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    return nextProps.show !== this.props.show ||
+      nextState.filterEmojiResult !== this.state.filterEmojiResult;
   }
 
   filterEmoji(e) {
@@ -38,7 +36,7 @@ export default class EmojiPicker extends Component {
     const filterEmojiResult = emojis.filter(name => name.indexOf(emojiName) !== -1);
 
     return emojiName.length === 0 ?
-      this.setState({ filterEmoji: false }) :
+      this.setState({ filterEmoji: false, filterEmojiResult: [] }) :
       this.setState({ filterEmoji: true, filterEmojiResult });
   }
 
@@ -78,7 +76,7 @@ export default class EmojiPicker extends Component {
             <span key={e}>
               <img
                 id={e}
-                alt={emoji}
+                role="presentation"
                 src={getEmoji(e)}
                 onClick={() => {
                   handleEmoji(e);
@@ -95,31 +93,33 @@ export default class EmojiPicker extends Component {
 
   render() {
     const { show, selector, handleEmoji } = this.props;
+    let { emojiSearchInputStyle, selectorStyle } = this.props;
     const filterEmoji = this.state.filterEmoji;
     const filterEmojiResult = this.state.filterEmojiResult;
-    const emojiInputSearchStyle = {
-      margin: '5px',
-      width: '90%',
-      borderRadius: '5px',
-      border: '1px solid #E8E8E8',
-    };
+
+    if (emojiSearchInputStyle === undefined) {
+      emojiSearchInputStyle = defaultEmojiSearchInputStyle;
+    }
+    if (selectorStyle === undefined) {
+      selectorStyle = defaultSelectorStyle;
+    }
 
     return (
       <span>
-        <EmojiButton src={emojiButtonImage} selector={selector} />
-        <div id="showing" style={show ? selectorStyle : { display: 'none' }}>
+        <EmojiButton src={EmojiButtonImage} selector={selector} />
+        <SelectorBox show={show} style={selectorStyle}>
           <input
             ref={(ref) => this.myTextInput = ref}
-            style={emojiInputSearchStyle}
+            style={emojiSearchInputStyle}
             type="text"
             placeholder="Search"
-            onChange={(e) => this.filterEmoji(e)}
+            onChange={this.filterEmoji}
           />
           {filterEmoji ?
             this.renderFilterEmoji(filterEmojiResult, handleEmoji) :
             this.renderAllEmoji(categoryOfEmoji, handleEmoji)
           }
-        </div>
+        </SelectorBox>
       </span>
     );
   }
