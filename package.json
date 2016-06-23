@@ -10,7 +10,7 @@
     "test:watch": "npm test -- --watch",
     "test:cov": "nyc npm test",
     "build:lib": "babel src --out-dir lib",
-    "build:umd:min": "webpack src/index.js dist/react-emoji-picker.js --config webpack.production.js",
+    "build:umd:min": "webpack src/index.js dist/react-emoji-picker.js --config webpack.config.production.js",
     "build": "npm run build:lib && npm run build:umd:min",
     "prepublish": "npm run clean && npm run build"
   },
